@@ -1,13 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = 'https://fzlfedubjblnhrivxvlw.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6bGZlZHViamJsbmhyaXZ4dmx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NTM1NjcsImV4cCI6MjA5MDQyOTU2N30.mkVYLBCW2Y56OsBKOFiQGKaz_27JXCzS9Wx-JZ9YPKQ'
 
-if (!supabaseUrl || !supabaseKey) {
-  console.warn('Supabase env vars not set — running in demo mode')
-}
-
-export const supabase =
-  supabaseUrl && supabaseKey
-    ? createClient(supabaseUrl, supabaseKey)
-    : null
+export const supabase = createClient(supabaseUrl, supabaseKey)

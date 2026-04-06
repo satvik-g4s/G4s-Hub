@@ -1,0 +1,210 @@
+.bar {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--th);
+  background: var(--sidebar);
+  border-bottom: 1px solid var(--br);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 14px;
+  z-index: 100;
+}
+
+.logo {
+  width: var(--sw);
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  flex: 1;
+  max-width: 300px;
+  position: relative;
+}
+
+.search input {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--br);
+  border-radius: 8px;
+  padding: 7px 12px 7px 32px;
+  color: var(--tp);
+  font-size: 13px;
+  outline: none;
+  transition: all .2s;
+  
+}
+
+[data-theme="light"] .search input {
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.25);
+}
+
+.search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+}
+.search input:focus { border-color: var(--accent); }
+.search input::placeholder { color: var(--tm); }
+
+.right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .2s;
+  letter-spacing: .3px;
+}
+.badge:hover { opacity: .85; }
+.badgeOn { background: #f87171; }
+
+.pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--br);
+  border-radius: 999px;
+  padding: 4px 13px 4px 5px;
+  cursor: pointer;
+  transition: background .2s;
+  user-select: none;
+}
+.pill:hover { background: rgba(255,255,255,.09); }
+
+.avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.uname { font-size: 13px; font-weight: 500; }
+
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--br);
+  border-radius: 9px;
+  padding: 4px;
+  min-width: 165px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  z-index: 300;
+  animation: fade .15s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mi {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background .15s;
+  color: var(--tp);
+}
+.mi:hover { background: rgba(255,255,255,.07); }
+.mi i { width: 13px; text-align: center; color: var(--tm); font-size: 12px; }
+
+.red { color: #f87171; }
+.red i { color: #f87171; }
+
+.sep { height: 1px; background: var(--br); margin: 4px 0; }
+
+/* ===== SMALL SWITCH ===== */
+
+.switch {
+  position: relative;
+  width: 42px;   /* 🔥 smaller */
+  height: 22px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: #73C0FC;
+  border-radius: 20px;
+  transition: .3s;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  background: #e8e8e8;
+  transition: .3s;
+  z-index: 2;
+}
+
+.input:checked + .slider {
+  background-color: #183153;
+}
+
+.input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* icons (tiny now) */
+.sun, .moon {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 5px;
+}
+
+.sun { right: 4px; }
+.moon { left: 4px; }
+
+.sun svg {
+  animation: rotate 15s linear infinite;
+}
+
+.moon svg {
+  animation: tilt 5s linear infinite;
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes tilt {
+  0%,100% { transform: rotate(0); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}

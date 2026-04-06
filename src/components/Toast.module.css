@@ -1,0 +1,27 @@
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--card);
+  border: 1px solid var(--br);
+  border-radius: 9px;
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  animation: in .3s ease;
+}
+
+@keyframes in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ok  { border-color: rgba(52,211,153,.3); }
+.ok i  { color: #34d399; }
+.err { border-color: rgba(248,113,113,.3); }
+.err i { color: #f87171; }

@@ -1,0 +1,43 @@
+.sb {
+  position: fixed;
+  top: var(--th);
+  left: 0;
+  bottom: 0;
+  width: var(--sw);
+  background: var(--sidebar);
+  border-right: 1px solid var(--br);
+  padding: 20px 10px;
+  overflow-y: auto;
+
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3); /* 👈 add this */
+}
+
+.label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--tm);
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+  color: var(--tm);
+  margin-bottom: 2px;
+}
+.item:hover {
+  background: rgba(0,0,0,.04);
+  color: var(--tp);
+}
+.item.active { background: rgba(59, 131, 246, 0.258); color: var(--accent); }
+.item i { width: 14px; text-align: center; font-size: 13px; }

@@ -1,33 +1,69 @@
+
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
   gap: 14px;
+  align-items: start;
 }
+
+/* ================= CARD ================= */
 
 .card {
   background: var(--card);
-  border: 1px solid var(--br);
   border-radius: 12px;
-  padding: 22px 18px 18px;
-  cursor: pointer;
-  transition: all .2s;
+  padding: 16px 16px 14px;
+  cursor: grab;
   position: relative;
   overflow: hidden;
-  display: block;
-  animation: up .3s ease both;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.412);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 120px;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+
+  border: 1px solid transparent;
+
+  /* subtle gradient border (light theme friendly) */
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(
+      to bottom right,
+      rgba(0,0,0,0.08),
+      rgba(0,0,0,0.02)
+    ) border-box;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-  .card:hover {
-    transform: translateY(-5px) scale(1.02);
-    border-color: rgba(59,130,246,.4);
-    box-shadow: 0 12px 36px rgba(0,0,0,.4);
-  }
-
-@keyframes up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  z-index: 5;
 }
+
+.card:active {
+  cursor: grabbing;
+}
+
+/* 🔥 hover (merged properly) */
+.card:hover {
+  transform: translateY(-6px) scale(1.03);   /* 🔥 fake expansion */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+  z-index: 5;
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+/* ================= ICON ================= */
 
 .icon {
   width: 36px;
@@ -37,10 +73,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   font-size: 15px;
   color: var(--accent);
 }
+
+/* ================= CONTENT ================= */
+
+.content {
+  margin-top: auto;
+}
+
+/* ================= CATEGORY ================= */
 
 .cat {
   font-size: 9.5px;
@@ -51,12 +95,106 @@
   margin-bottom: 4px;
 }
 
-.title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--tp);
-  line-height: 1.3;
+/* ================= TITLE ================= */
+
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+  cursor: grab;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 120px;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+
+  border: 1px solid transparent;
+
+  /* subtle gradient border (light theme friendly) */
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(
+      to bottom right,
+      rgba(0,0,0,0.08),
+      rgba(0,0,0,0.02)
+    ) border-box;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  z-index: 5;
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+/* 🔥 fade effect */
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 120px;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+
+  border: 1px solid transparent;
+
+  /* subtle gradient border (light theme friendly) */
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(
+      to bottom right,
+      rgba(0,0,0,0.08),
+      rgba(0,0,0,0.02)
+    ) border-box;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  z-index: 5;
+}
+
+
+
+/* 🔥 expand title on hover */
+.card:hover .title {
+  -webkit-line-clamp: unset;
+}
+
+/* remove fade when expanded */
+.card:hover .title::after {
+  display: none;
+}
+
+
+
+/* ================= DELETE ================= */
 
 .del {
   position: absolute;
@@ -75,7 +213,12 @@
   cursor: pointer;
   transition: background .15s;
 }
-.del:hover { background: rgba(248,113,113,.28); }
+
+.del:hover {
+  background: rgba(248,113,113,.28);
+}
+
+/* ================= EMPTY ================= */
 
 .empty {
   grid-column: 1 / -1;
@@ -83,9 +226,24 @@
   padding: 80px 20px;
   color: var(--tm);
 }
+
 .empty i {
   font-size: 30px;
   display: block;
   margin-bottom: 12px;
   opacity: .4;
+}
+
+[data-theme="light"] .card {
+  border: 1px solid transparent;   /* important */
+  
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(
+      to bottom right,
+      rgba(0,0,0,0.08),
+      rgba(0,0,0,0.02)
+    ) border-box;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.38);  /* very subtle */
 }

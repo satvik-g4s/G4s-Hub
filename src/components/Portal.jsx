@@ -91,7 +91,6 @@ useEffect(() => {
       icon: item.icon,
       target: '_blank',
       position: items.length,
-      email: item.email || 'default@mail.com'
     }
 
     if (item.id) {

@@ -37,6 +37,7 @@
 
     const [items, setItems] = useState(cards)
     const draggedRef = useRef(false)
+    const [isDragging, setIsDragging] = useState(false)
 
     useEffect(() => {
       setItems(cards)
@@ -80,11 +81,35 @@
       )
     }
 
+    // ✅ NORMAL MODE (NO DRAG)
+    if (!adminMode) {
+      return (
+        <div className={styles.grid}>
+          {items.map((card, i) => (
+            <ToolCard
+              key={card.id}
+              card={card}
+              index={i}
+              adminMode={adminMode}
+              onDelete={onDelete}
+              onNoUrl={onNoUrl}
+              onEdit={onEdit}
+            />
+          ))}
+        </div>
+      )
+    }
+
+    // ✅ ADMIN MODE (DRAG ENABLED)
     return (
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={(event) => {
+          setIsDragging(false)
+          handleDragEnd(event)
+        }}
       >
         <SortableContext
           items={items.map(i => i.id)}
@@ -102,6 +127,7 @@
                 onNoUrl={onNoUrl}
                 onEdit={onEdit}
                 draggedRef={draggedRef}
+                isDragging={isDragging}
               />
             ))}
           </div>
@@ -128,15 +154,17 @@
       transform: CSS.Transform.toString(transform),
       transition,
       opacity: isDragging ? 0.5 : 1,
-      cursor: isDragging ? 'grabbing' : 'pointer'   // 🔥 key fix
+      cursor: props.adminMode
+        ? (isDragging ? 'grabbing' : 'grab')
+        : 'pointer'
     }
 
     return (
       <div
         ref={setNodeRef}
         style={style}
-        {...attributes}
-        {...listeners}   /* 🔥 keep listeners on full card */
+        {...(props.adminMode ? attributes : {})}
+        {...(props.adminMode ? listeners : {})}
       >
         <ToolCard card={card} index={index} draggedRef={draggedRef} {...props} />
       </div>
@@ -153,14 +181,15 @@
     adminMode,
     onDelete,
     onNoUrl,
-    onEdit
+    onEdit,
+    isDragging
   }) {
 
     const handleClick = (e) => {
 
-      if (draggedRef?.current) {
-        e.preventDefault()          // ❌ block click after drag
-        draggedRef.current = false  // reset
+      // 🚫 block clicks during drag
+      if (isDragging) {
+        e.preventDefault()
         return
       }
 
@@ -176,6 +205,8 @@
         href={card.url}
         target={card.target || "_blank"}
         rel="noreferrer"
+        draggable={false}
+        onDragStart={(e) => e.preventDefault()}
         style={{ animationDelay: `${index * 0.05}s` }}
         onClick={handleClick}
       >

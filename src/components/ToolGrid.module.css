@@ -13,7 +13,7 @@
   background: var(--card);
   border-radius: 12px;
   padding: 16px 16px 14px;
-  cursor: grab;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
 
@@ -101,7 +101,7 @@
   background: var(--card);
   border-radius: 12px;
   padding: 16px 16px 14px;
-  cursor: grab;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
 

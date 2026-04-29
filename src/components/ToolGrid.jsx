@@ -202,8 +202,8 @@
     return (
       <a
         className={styles.card}
-        href={card.url}
-        target={card.target || "_blank"}
+        href={adminMode ? undefined : card.url}
+        target={adminMode ? undefined : (card.target || "_blank")}
         rel="noreferrer"
         draggable={false}
         onDragStart={(e) => e.preventDefault()}
